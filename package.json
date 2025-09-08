@@ -1,0 +1,29 @@
+{
+  "name": "ecom-backend",
+  "version": "1.0.0",
+  "main": "build/server.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "set NODE_ENV=.env.dev&& nodemon --watch src --ext ts --exec \"tsc && node build/server.js\"",
+    "start": "set NODE_ENV=.env.prod&& node build/server.js",
+    "clean": "rmdir /s /q build"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "joi": "^18.0.1",
+    "mongoose": "^8.18.0",
+    "multer": "^2.0.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.3.0",
+    "esbuild": "^0.25.9",
+    "nodemon": "^3.1.10",
+    "typescript": "^5.9.2"
+  }
+}
