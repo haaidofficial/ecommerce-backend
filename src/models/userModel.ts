@@ -1,11 +1,10 @@
 import { Schema, Document, model } from 'mongoose';
 
-export interface IUser extends Document {
+export interface IUser {
     name: string;
     email: string;
     password: string;
 }
-
 
 const userSchema = new Schema<IUser>({
     name: { type: String, required: true, minLength: 3 },

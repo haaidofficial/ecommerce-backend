@@ -5,8 +5,9 @@ import router from './routes';
 const app: Application = express();
 
 app.use(express.json());
-app.use(errorHandler);
 app.use('/api', router);
+app.use(errorHandler);
+
 
 export default app;
 

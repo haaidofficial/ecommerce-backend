@@ -1,8 +1,9 @@
 import bcrypt from 'bcryptjs';
-import UserModel, { IUser } from "../models/userModel";
+import UserModel from "../models/userModel";
 import AppError from "../utils/appError";
+import { IRegisterUserResponse } from '../types/auth.types';
 
-const registerUser = async (name: string, email: string, password: string) => {
+export const registerUserService = async (name: string, email: string, password: string): Promise<IRegisterUserResponse> => {
     const existingUser = await UserModel.findOne({ email });
 
     if (existingUser) {
@@ -10,11 +11,12 @@ const registerUser = async (name: string, email: string, password: string) => {
     }
 
     const salt = await bcrypt.genSalt(12);
-    const hashedPassword = bcrypt.hash(password, salt);
+    const hashedPassword = await bcrypt.hash(password, salt);
     const newUser = await UserModel.create({ name, email, password: hashedPassword });
 
     return {
-        id: newUser._id,
-        
+        id: newUser._id.toString(),
+        name: newUser.name,
+        email: newUser.email
     }
 }
