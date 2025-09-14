@@ -21,9 +21,16 @@ export interface IUser {
 export interface IAccountDTO {
     id: string;
     name: string;
-    email:string;
+    email: string;
     role: string;
     isVerified: Boolean;
     address: IAddress[];
     avatar: string;
+}
+
+export interface IAccountUpdate {
+    name?: string;
+    email?: string;
+    address?: IAddress[];
+    avatar?: string;
 }

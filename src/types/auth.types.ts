@@ -23,6 +23,10 @@ export interface ILoginResponse {
     userId?: string;
 }
 
-export interface IAuthenticatedRequest extends Request{
+export interface IAuthenticatedRequest extends Request {
+    userId?: string;
+}
+
+export interface ITokenEncodedInfo {
     userId: string;
 }

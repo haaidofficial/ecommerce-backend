@@ -17,7 +17,7 @@ const userSchema = new Schema<IUser>({
     isVerified: { type: Boolean, default: false },
     address: { type: [addressSchema], default: [] },
     passwordChangedAt: { type: Date },
-    resetPasswordToken: { type: String },
+    resetPasswordToken: { type: String, select: false },
     avatar: { type: String }
 });
 

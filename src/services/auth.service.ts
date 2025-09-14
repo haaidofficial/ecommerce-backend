@@ -36,7 +36,7 @@ export const loginService = async (email: string, password: string): Promise<ILo
         throw new AppError('Invalid email or password', 401);
     }
 
-    const token = jwt.sign({ id: user._id.toString() }, appConfig.jwtSecret as string, { expiresIn: appConfig.tokenExpiry } as SignOptions);
+    const token = jwt.sign({ userId: user._id.toString() }, appConfig.jwtSecret as string, { expiresIn: appConfig.tokenExpiry } as SignOptions);
 
     return {
         token,
@@ -50,6 +50,6 @@ export const getUserByIdService = async (userId: string): Promise<{ userId: stri
     const user = await UserModel.findById(userId).select('_id role');
     if (!user) {
         throw new AppError('User not found', 404);
-}
+    }
     return { userId: user._id.toString(), role: user.role }
 }
