@@ -15,7 +15,7 @@ export interface IUser {
     address: IAddress[];
     passwordChangedAt?: Date;
     resetPasswordToken?: string;
-    avatar: string;
+    profileImg: string;
 }
 
 export interface IAccountDTO {
@@ -25,12 +25,12 @@ export interface IAccountDTO {
     role: string;
     isVerified: Boolean;
     address: IAddress[];
-    avatar: string;
+    profileImg: string;
 }
 
 export interface IAccountUpdate {
     name?: string;
     email?: string;
     address?: IAddress[];
-    avatar?: string;
+    profileImg?: string;
 }

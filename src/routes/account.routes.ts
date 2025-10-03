@@ -6,7 +6,7 @@ import { uploadUserProfileImg } from '../middlewares/fileUploadHandler';
 const router = Router();
 
 router.get('/', getUserAccount);
-router.put('/update', uploadUserProfileImg.single('file'), validateRequest(updateAccountSchema), updateUserAccount);
+router.put('/update', uploadUserProfileImg.single('avatar'), validateRequest(updateAccountSchema), updateUserAccount);
 
 
 export default router;

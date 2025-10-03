@@ -30,3 +30,7 @@ export interface IAuthenticatedRequest extends Request {
 export interface ITokenEncodedInfo {
     userId: string;
 }
+
+export interface IUserUpdaterRequest extends IAuthenticatedRequest {
+    file?: Express.Multer.File;
+}

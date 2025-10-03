@@ -16,7 +16,7 @@ export const getUserAccountService = async (userId: string): Promise<IAccountDTO
         role: user.role,
         isVerified: user.isVerified,
         address: user.address,
-        avatar: user.avatar
+        profileImg: user.profileImg
     }
 }
 
@@ -30,7 +30,7 @@ export const updateUserAccountService = async (userId: string, updatedData: IAcc
         name: user?.name,
         email: user?.email,
         address: user?.address,
-        avatar: user?.avatar,
+        profileImg: user?.profileImg,
         isVerified: user?.isVerified,
     }
 }

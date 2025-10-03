@@ -1,4 +1,4 @@
-import { Schema, Document, model } from 'mongoose';
+import { Schema, model } from 'mongoose';
 import { IAddress, IUser } from '../types/user.types';
 
 const addressSchema = new Schema<IAddress>({
@@ -18,7 +18,7 @@ const userSchema = new Schema<IUser>({
     address: { type: [addressSchema], default: [] },
     passwordChangedAt: { type: Date },
     resetPasswordToken: { type: String, select: false },
-    avatar: { type: String }
+    profileImg: { type: String }
 });
 
 const UserModel = model<IUser>('User', userSchema);

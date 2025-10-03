@@ -86,12 +86,6 @@ export const updateAccountSchema = Joi.object({
         .messages(messages.email)
         .optional(),
 
-    avatar: Joi
-        .string()
-        .pattern(/^\/?uploads\/avatars\/[a-f0-9]{24}\/[a-zA-Z0-9._-]+\.(jpg|jpeg|png|webp)$/)
-        .messages(messages.avatar)
-        .optional(),
-
     address: Joi
         .array()
         .items(

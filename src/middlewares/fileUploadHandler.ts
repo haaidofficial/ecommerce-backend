@@ -35,7 +35,7 @@ const createStorage = (uploadType: UploadType) => {
         destination: (req: IAuthenticatedRequest, file, cb) => {
             const [entityFolder, fileTypeFolder, fileFolder] = getEntityFolderPath(uploadType, req, folder);
             const uploadPath = path.join(process.cwd(), 'uploads', entityFolder as string, fileTypeFolder as string, fileFolder as string);
-            if (!fs.readFileSync(uploadPath)) {
+            if (!fs.existsSync(uploadPath)) {
                 fs.mkdirSync(uploadPath, { recursive: true });
             }
             cb(null, uploadPath);
