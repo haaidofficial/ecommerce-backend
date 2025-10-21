@@ -1,4 +1,5 @@
 import Joi from 'joi';
+import mongoose from 'mongoose';
 
 const passwordRegex = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$');
 
@@ -86,33 +87,39 @@ export const updateAccountSchema = Joi.object({
         .messages(messages.email)
         .optional(),
 
-    address: Joi
-        .array()
-        .items(
-            Joi
-                .object({
-                    street: Joi
-                        .string()
-                        .messages(messages.address.street)
-                        .required(),
-                    city: Joi
-                        .string()
-                        .messages(messages.address.city)
-                        .required(),
-                    zip: Joi
-                        .string()
-                        .messages(messages.address.zip)
-                        .required(),
-                    country: Joi
-                        .string()
-                        .messages(messages.address.country)
-                        .required(),
-                    isDefault: Joi
-                        .boolean()
-                        .messages({ "boolean.base": "isDefault must be true or false", })
-                        .optional()
-                })
-        )
-        .optional()
 
+
+});
+
+export const addressSchema = Joi.object({
+    street: Joi
+        .string()
+        .messages(messages.address.street)
+        .required(),
+    city: Joi
+        .string()
+        .messages(messages.address.city)
+        .required(),
+    zip: Joi
+        .string()
+        .messages(messages.address.zip)
+        .required(),
+    country: Joi
+        .string()
+        .messages(messages.address.country)
+        .required(),
+    isDefault: Joi
+        .boolean()
+        .messages({ "boolean.base": "isDefault must be true or false", })
+        .optional()
+});
+
+export const addressIdSchema = Joi.object({
+    addressId: Joi.string().custom((value, helpers) => {
+        debugger
+        if (!mongoose.Types.ObjectId.isValid(value)) {
+            return helpers.error('any.invalid');
+        }
+        return value;
+    }).messages({ 'any.invalid': 'Invalid address id provided' })
 });

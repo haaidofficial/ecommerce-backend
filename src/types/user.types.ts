@@ -1,9 +1,12 @@
+import { Types } from "mongoose";
+
 export interface IAddress {
     street: string;
     city: string;
     zip: string;
     country: string;
     isDefault?: boolean;
+    _id?: Types.ObjectId
 }
 
 export interface IUser {
@@ -19,7 +22,7 @@ export interface IUser {
 }
 
 export interface IAccountDTO {
-    id: string;
+    userId: string;
     name: string;
     email: string;
     role: string;
@@ -31,6 +34,5 @@ export interface IAccountDTO {
 export interface IAccountUpdate {
     name?: string;
     email?: string;
-    address?: IAddress[];
     profileImg?: string;
 }
