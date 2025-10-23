@@ -25,6 +25,7 @@ export interface ILoginResponse {
 
 export interface IAuthenticatedRequest extends Request {
     userId?: string;
+    role?: string;
 }
 
 export interface ITokenEncodedInfo {

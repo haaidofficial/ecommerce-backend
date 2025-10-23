@@ -86,9 +86,6 @@ export const updateAccountSchema = Joi.object({
         .email()
         .messages(messages.email)
         .optional(),
-
-
-
 });
 
 export const addressSchema = Joi.object({

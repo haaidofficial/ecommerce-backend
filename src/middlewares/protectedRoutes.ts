@@ -20,6 +20,8 @@ export const authGuard = async (req: IAuthenticatedRequest, res: Response, next:
                 return next(new AppError('Invalid credentials', 401))
             }
             req.userId = user.userId;
+            req.role = user.role;
+
             return next();
         }
 
@@ -29,4 +31,11 @@ export const authGuard = async (req: IAuthenticatedRequest, res: Response, next:
         next(new AppError('Authorization header missing', 401));
     }
 
+}
+
+export const authAdmin = async (req: IAuthenticatedRequest, res: Response, next: NextFunction) => {
+    if (req.role !== 'admin') {
+        return next(new AppError('Access denied. Admin privileges required.', 403));
+    }
+    next();
 }

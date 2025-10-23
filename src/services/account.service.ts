@@ -1,10 +1,9 @@
-import { Types } from "mongoose";
 import UserModel from "../models/userModel"
 import { IAccountDTO, IAccountUpdate, IAddress } from "../types/user.types"
 import AppError from "../utils/appError";
 
 export const getUserAccountService = async (userId: string): Promise<IAccountDTO> => {
-    const user = await UserModel.findById(userId).select('_id name email role isVerified address avatar');
+    const user = await UserModel.findById(userId).select('_id name email role isVerified address profileImg');
 
     if (!user) {
         throw new AppError('User not found', 404);

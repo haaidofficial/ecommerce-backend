@@ -2,6 +2,9 @@ import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
 import { IAuthenticatedRequest } from '../types/auth.types';
+import AppError from '../utils/appError';
+
+const validImageMimeTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/avif'];
 
 type UploadType = 'PRODUCT_IMAGE' | 'USER_PROFILE_IMAGE' | 'MARKETING_LAYOUTS_IMAGE';
 
@@ -47,6 +50,22 @@ const createStorage = (uploadType: UploadType) => {
     })
 }
 
-export const uploadUserProfileImg = multer({ storage: createStorage('USER_PROFILE_IMAGE') });
-export const uploadProductImg = multer({ storage: createStorage('PRODUCT_IMAGE') });
-export const uploadMarketingLayouts = multer({ storage: createStorage('MARKETING_LAYOUTS_IMAGE') })
+const multerConfig = (uploadType: UploadType): multer.Options => {
+    return {
+        storage: createStorage(uploadType),
+        limits: { fileSize: 5 * 1024 * 1024 },
+        fileFilter: (req, file, cb) => {
+            if(validImageMimeTypes.includes(file.mimetype)){
+                cb(null, true)
+            }
+            else{
+                const errMsg = `Valid files - ${validImageMimeTypes.join(', ').replace(/image\//g, '')}`;
+                cb(new AppError(errMsg, 400))
+            }
+        }
+    }
+}
+
+export const uploadUserProfileImg = multer(multerConfig('USER_PROFILE_IMAGE'));
+export const uploadProductImg = multer(multerConfig('PRODUCT_IMAGE'));
+export const uploadMarketingLayouts = multer(multerConfig('MARKETING_LAYOUTS_IMAGE'))
